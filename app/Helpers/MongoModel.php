@@ -74,4 +74,16 @@ class MongoModel
     {
         $this->collection->deleteOne($filter);
     }
+
+    public function update(array $filter, array $update): ?array
+    {
+    $options = [
+        'returnDocument' => \MongoDB\Operation\FindOneAndUpdate::RETURN_DOCUMENT_AFTER,
+    ];
+
+    $result = $this->collection->findOneAndUpdate($filter, $update, $options);
+
+    return $result;
+    }
+
 }
